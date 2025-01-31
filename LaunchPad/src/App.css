@@ -1,0 +1,103 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+/* App.css *//* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Header */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1d4ed8;
+}
+
+/* Auth Buttons */
+header .auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.auth-buttons .login {
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+}
+
+.auth-buttons .signup {
+  background: transparent;
+  color: #1d4ed8;
+  border: 2px solid #1d4ed8;
+}
+
+.auth-buttons .login:hover {
+  background-color: #143aa3;
+}
+
+.auth-buttons .signup:hover {
+  background-color: #1d4ed8;
+  color: white;
+}
+
+/* Main Content */
+main {
+  margin-top: 100px; /* Ensure content is visible below header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Image */
+main img {
+  width: 250px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Text */
+main h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+main p {
+  font-size: 16px;
+  color: #666;
+  max-width: 400px;
+  margin-top: 10px;
+}
