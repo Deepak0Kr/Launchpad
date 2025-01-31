@@ -31,13 +31,14 @@ header {
 header .logo {
   font-size: 24px;
   font-weight: bold;
-  color: #1d4ed8;
+  color: #000000;
 }
 
 /* Auth Buttons */
 header .auth-buttons {
   display: flex;
   gap: 10px;
+  margin-right: 50px;
 }
 
 .auth-buttons button {
@@ -49,23 +50,23 @@ header .auth-buttons {
 }
 
 .auth-buttons .login {
-  background-color: #1d4ed8;
+  background-color: #000000;
   color: white;
   border: none;
 }
 
 .auth-buttons .signup {
   background: transparent;
-  color: #1d4ed8;
-  border: 2px solid #1d4ed8;
+  color: #000000;
+  border: 2px solid #000000;
 }
 
 .auth-buttons .login:hover {
-  background-color: #143aa3;
+  background-color: #2f2f2f;
 }
 
 .auth-buttons .signup:hover {
-  background-color: #1d4ed8;
+  background-color: #2f2f2f;
   color: white;
 }
 
@@ -100,4 +101,10 @@ main p {
   color: #666;
   max-width: 400px;
   margin-top: 10px;
+}
+
+.header-title{
+  font-size: 24px;
+  font-weight: bold;
+  color: black;  
 }

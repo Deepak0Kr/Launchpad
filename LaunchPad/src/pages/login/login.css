@@ -1,0 +1,86 @@
+/* Login Page Styles */
+.login-container {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.login-container h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: black;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: black;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+    /* Light grey background color for inputs */
+    color: black;
+    /* Set text color to black */
+}
+
+.input-group input:focus {
+    background-color: #e0e0e0;
+    /* Slightly darker on focus */
+    outline: none;
+    /* Remove default focus outline */
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.options label {
+    color: black;
+    /* Set "Remember Me" text color to black */
+}
+
+.forgot-password {
+    background: none;
+    border: none;
+    color: #1d4ed8;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 16px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-btn:hover {
+    background-color: #2f2f2f;
+}
