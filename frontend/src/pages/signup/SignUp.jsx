@@ -27,6 +27,7 @@ const SignUp = () => {
             // Prepare the data to be sent to the backend
             const userData = {
                 username: formData.username,
+                name: formData.name,
                 email: formData.email, // Include email in the payload
                 password: formData.password
             };
