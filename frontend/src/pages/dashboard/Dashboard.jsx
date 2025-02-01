@@ -4,8 +4,9 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-//   const location = useLocation();
+  const location = useLocation();
 //   const data = location.state || {};
+const { data, username } = location.state || {};
 
   const handleLogout = () => {
     // Handle logout logic here (e.g., clearing user data, redirecting to login)
@@ -20,7 +21,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h2>Welcome to Your Dashboard!</h2>
+        <h2>Welcome to Your Dashboard! {username}</h2>
       </header>
 
       <div className="dashboard-content">

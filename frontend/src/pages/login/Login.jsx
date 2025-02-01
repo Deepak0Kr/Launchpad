@@ -22,7 +22,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         if(data){
-          navigate("/dashboard",  { state: { data } });
+          navigate("/dashboard",  { state: { data,username } });
         }else{
           alert("wrong id pass.");
         }
