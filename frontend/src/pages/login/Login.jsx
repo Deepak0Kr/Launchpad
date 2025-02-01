@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Importing new CSS file
 
 const Login = () => {
@@ -6,8 +7,32 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    console.log("Logging in with:", { username, password, rememberMe });
+
+    fetch("http://localhost:8080/api/users/login", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({username, password}), // Convert the data to JSON
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if(data){
+          navigate("/dashboard",  { state: { data } });
+        }else{
+          alert("wrong id pass.");
+        }
+      })
+      .catch((error) => {
+        console.log("Error login user:", error);
+        alert("Failed to login user.");
+      });
+
+    // console.log("Logging in with:", { username, password, rememberMe });
   };
 
   return (

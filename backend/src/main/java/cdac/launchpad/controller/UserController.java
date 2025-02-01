@@ -20,9 +20,17 @@ public class UserController {
         return ResponseEntity.ok(registeredUser);
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-        User user = userService.findByUsername(username);
-        return ResponseEntity.ok(user);
+    // Login Endpoint
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        // Find the user by username and validate password
+        User loggedInUser = null;
+        if (userService.validateLogin(user)) {
+            // Fetch the user details if login is successful
+            loggedInUser = userService.findByUsername(user.getUsername());
+        }
+
+        // If login successful, return the user data, else return null
+        return ResponseEntity.ok(loggedInUser);
     }
 }
