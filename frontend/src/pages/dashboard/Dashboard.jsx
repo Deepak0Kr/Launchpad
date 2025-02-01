@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-//   const data = location.state || {};
+
 const { data, username } = location.state || {};
 
   const handleLogout = () => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // Importing new CSS file
-
+import { Link } from "react-router-dom";
+import "./Login.css"; 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,15 +32,19 @@ const Login = () => {
         alert("Failed to login user.");
       });
 
-    // console.log("Logging in with:", { username, password, rememberMe });
+    
   };
 
   return (
     <div>
       <header>
+      <Link to="/">
         <div className="header-title">Launchpad</div>
+        </Link>
         <div className="auth-buttons">
-          <button className="signup">Sign Up</button>
+        <Link to="/signup">
+              <button className="signup">Sign Up</button>
+          </Link>
         </div>
       </header>
       <div className="login-container">

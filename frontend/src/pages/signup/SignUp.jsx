@@ -55,7 +55,9 @@ const SignUp = () => {
     return (
         <div>
             <header>
-                <div className="header-title">Launchpad</div>
+            <Link to="/">
+        <div className="header-title">Launchpad</div>
+        </Link>
                 <div className="auth-buttons">
                     <Link to="/login">
                         <button className="login">Login</button>
