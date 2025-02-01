@@ -6,6 +6,7 @@ const SignUp = () => {
     const [formData, setFormData] = useState({
         name: "",
         username: "",
+        email: "", // Added email field
         password: "",
         confirmPassword: ""
     });
@@ -23,8 +24,30 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword) {
             alert("Passwords do not match!");
         } else {
-            // Handle sign up logic here
-            console.log("Form submitted", formData);
+            // Prepare the data to be sent to the backend
+            const userData = {
+                username: formData.username,
+                email: formData.email, // Include email in the payload
+                password: formData.password
+            };
+
+            // Send the data to the backend
+            fetch("http://localhost:8080/api/users/register", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData), // Convert the data to JSON
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("User registered successfully:", data);
+                    alert("User registered successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error registering user:", error);
+                    alert("Failed to register user.");
+                });
         }
     };
 
@@ -62,6 +85,18 @@ const SignUp = () => {
                             value={formData.username}
                             onChange={handleChange}
                             placeholder="Enter your username"
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label> {/* Added email field */}
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email"
                             required
                         />
                     </div>
