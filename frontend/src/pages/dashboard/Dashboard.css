@@ -139,3 +139,37 @@
     font-size: 14px;
   }
 }
+/* Build Logs Container */
+.build-logs-container {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 24px;
+  color: #ffffff;
+  font-family: monospace;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.build-logs-container h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.build-logs {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Error Message */
+.error-message {
+  background-color: #ffebee;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 24px;
+  color: #c62828;
+  font-size: 14px;
+}

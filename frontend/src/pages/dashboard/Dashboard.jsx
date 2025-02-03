@@ -12,20 +12,54 @@ const Dashboard = () => {
   const [repoLink, setRepoLink] = useState("");
   const [projectName, setProjectName] = useState("");
 
+  // State for build logs
+  const [buildLogs, setBuildLogs] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const handleLogout = () => {
     navigate("/login"); // Redirect to login page after logging out
   };
 
-  const handleImportRepo = () => {
+  const handleImportRepo = async () => {
     // Basic validation
     if (!projectType || !repoLink || !projectName) {
       alert("Please fill out all fields.");
       return;
     }
 
-    // Logic to handle Git repository import
-    alert(`Importing repository...\nProject Type: ${projectType}\nRepo Link: ${repoLink}\nProject Name: ${projectName}`);
-    // Here you can add API calls or further processing
+    setIsLoading(true);
+    setError("");
+    setBuildLogs("");
+
+    try {
+      // Simulate an API call to the backend
+      const response = await fetch("http://localhost:8080/api/project/createProject", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          projectType,
+          repoLink,
+          projectName,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to start build process.");
+      }
+
+      const data = await response.json();
+
+      // Simulate receiving build logs from the backend
+      // In a real scenario, you might use WebSockets or polling to get live logs
+      setBuildLogs(data.logs || "Build process started...");
+    } catch (err) {
+      setError(err.message || "An error occurred while processing your request.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -49,10 +83,8 @@ const Dashboard = () => {
               required
             >
               <option value="">Select Project Type</option>
-              <option value="web">Web Application</option>
-              <option value="mobile">Mobile Application</option>
-              <option value="desktop">Desktop Application</option>
-              <option value="other">Other</option>
+              <option value="react">react Application</option>
+             
             </select>
             <input
               type="text"
@@ -70,11 +102,30 @@ const Dashboard = () => {
               className="git-import-input"
               required
             />
-            <button className="git-import-btn" onClick={handleImportRepo}>
-              Import
+            <button
+              className="git-import-btn"
+              onClick={handleImportRepo}
+              disabled={isLoading}
+            >
+              {isLoading ? "Processing..." : "Start"}
             </button>
           </div>
         </div>
+
+        {/* Build Logs Container */}
+        {buildLogs && (
+          <div className="build-logs-container">
+            <h3>Build Logs</h3>
+            <pre className="build-logs">{buildLogs}</pre>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className="error-message">
+            <p>{error}</p>
+          </div>
+        )}
       </div>
     </div>
   );

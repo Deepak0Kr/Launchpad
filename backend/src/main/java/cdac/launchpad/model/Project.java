@@ -14,8 +14,8 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Type;
+    private String projectType;
     private String projectName;
-    private String githubURL;
+    private String repoLink;
     private Long userId;
 }
