@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         username: "",
@@ -43,7 +47,8 @@ const SignUp = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("User registered successfully:", data);
-                    alert("User registered successfully!");
+                    // alert("User registered successfully!");
+                    navigate("/login");
                 })
                 .catch((error) => {
                     console.error("Error registering user:", error);
