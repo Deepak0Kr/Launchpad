@@ -1,5 +1,6 @@
 package cdac.launchpad.service;
 
+import cdac.launchpad.buildService.BuildService;
 import cdac.launchpad.model.Project;
 import cdac.launchpad.model.User;
 import cdac.launchpad.repository.ProjectRepository;
@@ -14,7 +15,9 @@ public class ProjectService {
 
     public Project createProject(Project project) {
         // Add validation logic here if needed
-        return projectRepository.save(project);
+        Project saveProject = projectRepository.save(project);
+        BuildService.startBuilding(saveProject);
+        return saveProject;
     }
 
     public Project getProjectByName(String projectName) {
