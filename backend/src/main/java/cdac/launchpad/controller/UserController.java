@@ -1,5 +1,6 @@
 package cdac.launchpad.controller;
 
+import cdac.launchpad.model.Project;
 import cdac.launchpad.model.User;
 import cdac.launchpad.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class UserController {
 
         // If login successful, return the user data, else return null
         return ResponseEntity.ok(loggedInUser);
+    }
+
+    @PostMapping("/createProject")
+    public ResponseEntity<Project> createProject(@RequestBody Project project) {
+        System.out.println(project);
+        return ResponseEntity.ok(project);
     }
 }
