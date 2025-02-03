@@ -35,9 +35,4 @@ public class UserController {
         return ResponseEntity.ok(loggedInUser);
     }
 
-    @PostMapping("/createProject")
-    public ResponseEntity<Project> createProject(@RequestBody Project project) {
-        System.out.println(project);
-        return ResponseEntity.ok(project);
-    }
 }
