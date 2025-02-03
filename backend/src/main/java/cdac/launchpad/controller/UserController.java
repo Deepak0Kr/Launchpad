@@ -1,5 +1,6 @@
 package cdac.launchpad.controller;
 
+import cdac.launchpad.mailservice.MailService;
 import cdac.launchpad.model.Project;
 import cdac.launchpad.model.User;
 import cdac.launchpad.service.UserService;
@@ -14,6 +15,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
@@ -33,6 +37,17 @@ public class UserController {
 
         // If login successful, return the user data, else return null
         return ResponseEntity.ok(loggedInUser);
+    }
+
+
+    @PostMapping("/send")
+    public String sendEmail(@RequestParam String email) {
+
+//        http://localhost:8080/api/users/send?email=recipient@example.com ----> example
+
+        int otp = (int) Math.floor((Math.random() + 1) * 1000);
+        mailService.sendEmail(email, "OTP", Integer.toString(otp));
+        return "Email Sent Successfully!";
     }
 
 }
