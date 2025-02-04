@@ -80,7 +80,7 @@ main {
   align-items: center;
   justify-content: center;
   height: 100vh; /* Full viewport height */
-  background-image: url("/freepik__the-style-is-candid-image-photography-with-natural__59550.png");
+  background-image: url("assets/freepik__the-style-is-candid-image-photography-with-natural__59550.png");
   background-size: cover; /* Cover the entire area */
   background-position: center; /* Center the image */
   color: white; /* Text color */
