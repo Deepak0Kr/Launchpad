@@ -4,7 +4,8 @@
   padding: 2rem;
   text-align: center;
 }
-/* App.css *//* General Styles */
+
+/* General Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -50,23 +51,23 @@ header .auth-buttons {
 }
 
 .auth-buttons .login {
-  background-color: #000000;
+  background-color: #007BFF; /* Blue */
   color: white;
   border: none;
 }
 
 .auth-buttons .signup {
   background: transparent;
-  color: #000000;
-  border: 2px solid #000000;
+  color: #007BFF; /* Blue */
+  border: 2px solid #007BFF; /* Blue */
 }
 
 .auth-buttons .login:hover {
-  background-color: #2f2f2f;
+  background-color: #0056b3; /* Darker Blue */
 }
 
 .auth-buttons .signup:hover {
-  background-color: #2f2f2f;
+  background-color: #007BFF; /* Blue */
   color: white;
 }
 
@@ -103,7 +104,7 @@ main p {
   margin-top: 10px;
 }
 
-.header-title{
+.header-title {
   font-size: 24px;
   font-weight: bold;
   color: black;  
