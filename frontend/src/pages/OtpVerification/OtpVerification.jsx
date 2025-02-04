@@ -8,7 +8,7 @@ const OtpVerification = () => {
     
     const {data} = location.state || {};
     const email = data.email;
-    console.log(email);
+   
     
 
     const [otp, setOtp] = useState("");
@@ -20,14 +20,15 @@ const OtpVerification = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        fetch("http://localhost:8080/api/users/verify", {
+        fetch(`http://localhost:8080/api/users/verify?email=${email}&otp=${otp}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, otp }),
+            
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
+                
                 if (data.success) {
                     alert("OTP Verified Successfully!");
                     

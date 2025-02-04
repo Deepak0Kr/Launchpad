@@ -4,8 +4,12 @@ import cdac.launchpad.mailservice.MailService;
 import cdac.launchpad.model.User;
 import cdac.launchpad.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -56,17 +60,25 @@ public class UserController {
 
     // Verify OTP
     @PostMapping("/verify")
-    public String verifyOtp(@RequestParam String email, @RequestParam int otp) {
+    public ResponseEntity<Map<String, Object>> verifyOtp(@RequestParam String email, @RequestParam int otp) {
         // Retrieve the OTP from MailService
         Integer storedOtp = mailService.getOtp(email);
+
+        // Create a response object
+        Map<String, Object> response = new HashMap<>();
 
         // Check if the OTP is correct
         if (storedOtp != null && storedOtp == otp) {
             // OTP verified, remove it from storage
             mailService.removeOtp(email);
-            return "OTP Verified Successfully!";
+            response.put("success", true);
+            response.put("message", "OTP Verified Successfully!");
+            return ResponseEntity.ok(response);
         } else {
-            return "Invalid OTP!";
+            response.put("success", false);
+            response.put("message", "Invalid OTP!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
 }

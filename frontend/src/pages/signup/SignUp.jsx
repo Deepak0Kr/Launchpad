@@ -52,9 +52,9 @@ const SignUp = () => {
                         headers: { "Content-Type": "application/json" },
                         
                     })
-                    .then((otpResponse) => otpResponse.json())
-                    .then((data) => {
-                        console.log("OTP sent successfully:", data);
+                    .then((otpResponse) => otpResponse.text())
+                    .then((resData) => {
+                        console.log("OTP sent successfully:", resData);
                         // Redirect to OTP verification page
                         navigate("/otp-verification", { state: { data } });
                     })
