@@ -20,10 +20,10 @@ const App = () => {
 
       {/* Main Content */}
       <main>
-        <img
-          src="https://via.placeholder.com/400"
+        {/* <img
+          src="\freepik__the-style-is-candid-image-photography-with-natural__59550.png"
           alt="Placeholder"
-        />
+        /> */}
         <h1>Welcome to Our Platform</h1>
         <p>
           Join us and experience the best service with seamless login and signup options.
