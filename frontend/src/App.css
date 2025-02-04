@@ -1,3 +1,4 @@
+/* Root Container */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -73,33 +74,34 @@ header .auth-buttons {
 
 /* Main Content */
 main {
-  margin-top: 100px; /* Ensure content is visible below header */
+  position: relative; /* Ensure it's positioned correctly */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  background-image: url("/freepik__the-style-is-candid-image-photography-with-natural__59550.png");
+  background-size: cover; /* Cover the entire area */
+  background-position: center; /* Center the image */
+  color: white; /* Text color */
   text-align: center;
-  padding: 20px;
-}
-
-/* Image */
-main img {
-  width: 250px;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-left: -2rem; /* Offset root padding */
+  margin-right: -2rem; /* Offset root padding */
+  width: 100vw; /* Full viewport width */
+  left: 50%; /* Move to the center */
+  transform: translateX(-50%); /* Adjust for centering */
 }
 
 /* Text */
 main h1 {
   font-size: 28px;
   font-weight: bold;
-  color: #333;
+  color: white; /* Changed to white for better contrast */
 }
 
 main p {
   font-size: 16px;
-  color: #666;
+  color: white; /* Changed to white for better contrast */
   max-width: 400px;
   margin-top: 10px;
 }
