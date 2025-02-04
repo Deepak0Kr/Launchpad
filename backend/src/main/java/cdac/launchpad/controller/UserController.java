@@ -1,7 +1,6 @@
 package cdac.launchpad.controller;
 
 import cdac.launchpad.mailservice.MailService;
-import cdac.launchpad.model.Project;
 import cdac.launchpad.model.User;
 import cdac.launchpad.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +38,35 @@ public class UserController {
         return ResponseEntity.ok(loggedInUser);
     }
 
-
+    // Send OTP to the email
     @PostMapping("/send")
     public String sendEmail(@RequestParam String email) {
-
-//        http://localhost:8080/api/users/send?email=recipient@example.com ----> example
+        // Generate a random OTP
 
         int otp = (int) Math.floor((Math.random() + 1) * 1000);
+
+        // Save the OTP in the mail service (temporary storage)
+        mailService.saveOtp(email, otp);
+
+        // Send the OTP to the user via email
         mailService.sendEmail(email, "OTP", Integer.toString(otp));
+
         return "Email Sent Successfully!";
     }
 
+    // Verify OTP
+    @PostMapping("/verify")
+    public String verifyOtp(@RequestParam String email, @RequestParam int otp) {
+        // Retrieve the OTP from MailService
+        Integer storedOtp = mailService.getOtp(email);
+
+        // Check if the OTP is correct
+        if (storedOtp != null && storedOtp == otp) {
+            // OTP verified, remove it from storage
+            mailService.removeOtp(email);
+            return "OTP Verified Successfully!";
+        } else {
+            return "Invalid OTP!";
+        }
+    }
 }

@@ -36,24 +36,38 @@ const SignUp = () => {
                 password: formData.password
             };
 
-            // Send the data to the backend
             fetch("http://localhost:8080/api/users/register", {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData), // Convert the data to JSON
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userData),
             })
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("User registered successfully:", data);
-                    // alert("User registered successfully!");
-                    navigate("/login");
+                    // Send OTP request to the server after registration
+                    const otpData = data.email ;
+                    
+                    fetch(`http://localhost:8080/api/users/send?email=${otpData}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        
+                    })
+                    .then((otpResponse) => otpResponse.json())
+                    .then((data) => {
+                        console.log("OTP sent successfully:", data);
+                        // Redirect to OTP verification page
+                        navigate("/otp-verification", { state: { data } });
+                    })
+                    .catch((otpError) => {
+                        console.error("Error sending OTP:", otpError);
+                        alert("Failed to send OTP.");
+                    });
                 })
                 .catch((error) => {
                     console.error("Error registering user:", error);
                     alert("Failed to register user.");
                 });
+            
         }
     };
 
