@@ -47,7 +47,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding: 40px 20px 320px; /* Add extra padding at the bottom */
   background-color: #f8f9fa; /* Light gray background */
 }
 
@@ -107,18 +107,25 @@
 .git-import-btn:hover {
   background-color: #2980b9; /* Darker blue on hover */
 }
-
+/* Build Logs Container */
 /* Build Logs Container */
 .build-logs-container {
-  background-color: #2c3e50; /* Dark blue-gray */
+  position: fixed;
+  bottom: 0;
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for exact centering */
+  width: 80%; /* Adjust width as needed (e.g., 80% of the screen width) */
+  max-width: 800px; /* Optional: Set a maximum width */
+  background-color: #1e1e1e; /* Dark background for terminal look */
   padding: 20px;
-  border-radius: 8px;
-  margin-top: 24px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   color: #ffffff;
   font-family: monospace;
-  max-height: 400px;
+  max-height: 200px; /* Adjust height as needed */
   overflow-y: auto;
-  box-shadow: 0px 4px 12px rgba(52, 152, 219, 0.1); /* Soft blue shadow */
+  box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  z-index: 1000; /* Ensure it stays above other content */
 }
 
 .build-logs-container h3 {
@@ -132,6 +139,33 @@
   word-wrap: break-word;
   font-size: 14px;
   line-height: 1.5;
+  color: #d5e5d5; /* Green text for terminal effect */
+}
+
+/* Scrollbar Styling */
+.build-logs-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.build-logs-container::-webkit-scrollbar-track {
+  background: #1e1e1e; /* Dark background */
+}
+
+.build-logs-container::-webkit-scrollbar-thumb {
+  background: #555; /* Scrollbar handle color */
+  border-radius: 4px;
+}
+
+.build-logs-container::-webkit-scrollbar-thumb:hover {
+  background: #777; /* Scrollbar handle hover color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .build-logs-container {
+    width: 90%; /* Increase width for smaller screens */
+    max-width: none; /* Remove max-width restriction */
+  }
 }
 
 /* Error Message */
