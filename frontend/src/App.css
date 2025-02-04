@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* General Styles */
@@ -12,6 +13,7 @@ body, html {
   padding: 0;
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* Header */
@@ -80,6 +82,7 @@ main {
   align-items: center;
   justify-content: center;
   height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
   background-image: url("assets/freepik__the-style-is-candid-image-photography-with-natural__59550.png");
   background-size: cover; /* Cover the entire area */
   background-position: center; /* Center the image */
@@ -87,7 +90,6 @@ main {
   text-align: center;
   margin-left: -2rem; /* Offset root padding */
   margin-right: -2rem; /* Offset root padding */
-  width: 100vw; /* Full viewport width */
   left: 50%; /* Move to the center */
   transform: translateX(-50%); /* Adjust for centering */
 }
