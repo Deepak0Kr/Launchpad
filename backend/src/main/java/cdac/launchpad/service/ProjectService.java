@@ -18,7 +18,7 @@ public class ProjectService {
     public Project createProject(Project project) {
         // Add validation logic here if needed
         Project saveProject = projectRepository.save(project);
-        BuildService.startBuilding(saveProject);
+
         return saveProject;
     }
 

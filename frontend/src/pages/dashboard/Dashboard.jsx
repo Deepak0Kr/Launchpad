@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -48,6 +49,7 @@ const Dashboard = () => {
           <p>No projects found.</p>
         )}
       </div>
+      <Link to="/create-project"> <button>Create Project</button> </Link>
     </div>
   );
 };
