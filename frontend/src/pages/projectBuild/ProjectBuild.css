@@ -1,3 +1,7 @@
+#linktext{
+  color: black;
+}
+
 .dashboard-header {
     position: fixed;
     top: 0;
@@ -97,7 +101,7 @@
     overflow-y: auto;
     box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    max-height: 70vh; /* Increase the max height */
+    max-height: 300px; /* Increase the max height */
   }
   
   .build-logs-container h3 {

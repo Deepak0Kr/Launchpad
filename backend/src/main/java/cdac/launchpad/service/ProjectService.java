@@ -8,12 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    public Project getProjectByID(Long id){
+        Optional<Project> optional = projectRepository.findById(id);
+        if (optional.isPresent()){
+            return optional.get();
+        }
+        return null;
+    }
 
     public Project createProject(Project project) {
         // Add validation logic here if needed

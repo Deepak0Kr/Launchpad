@@ -3,6 +3,7 @@ package cdac.launchpad.controller;
 import cdac.launchpad.buildService.BuildService;
 import cdac.launchpad.model.Project;
 import cdac.launchpad.service.ProjectService;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,6 @@ public class ProjectController {
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
         System.out.println(project);
         Project createdProject = projectService.createProject(project);
-//        BuildService.startBuilding(createdProject); // Start the build process
-//        Map<String, String> response = new HashMap<>();
-//        response.put("id", createdProject.getProjectName()); // Use project name as ID
         return ResponseEntity.ok(createdProject);
     }
 
@@ -46,5 +44,14 @@ public class ProjectController {
     public ResponseEntity<String> getBuildLogs(@PathVariable String projectName) {
         String logs = BuildService.getBuildLogs(projectName);
         return ResponseEntity.ok(logs);
+    }
+
+    @PostMapping("/startBuild/{projectID}")
+    public ResponseEntity<String> startBuild(@PathVariable Long projectID) {
+        Project project = projectService.getProjectByID(projectID);
+        BuildService.startBuilding(project); // Start the build process
+//        Map<String, String> response = new HashMap<>();
+//        response.put("id", project.getProjectName()); // Use project name as ID
+        return ResponseEntity.ok("build");
     }
 }

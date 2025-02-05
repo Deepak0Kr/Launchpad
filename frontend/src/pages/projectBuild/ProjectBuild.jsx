@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProjectBuild.css";
 
@@ -7,26 +7,57 @@ const ProjectBuild = () => {
   const [projectLink, setProjectLink] = useState("Generating....");
   const navigate = useNavigate();
 
+  // Get project details from localStorage
   const project = JSON.parse(localStorage.getItem("project"));
   let buildId = project.id;
 
-  useEffect(() => {
-    // Fetch build logs from the API
-    fetch(`http://localhost:8080/api/project/getBuildLogs/${buildId}`)
-      .then((response) => response.text()) // Assuming the response is plain text
-      .then((data) => setBuildLogs(data))
-      .catch((error) => {
-        console.error("Error fetching build logs:", error);
-        setBuildLogs("Failed to load build logs.");
-      });
-  }, [buildId]);
+  // Function to fetch build logs
+  const fetchBuildLogs = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/project/getBuildLogs/${project.projectName}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch build logs.");
+      }
+      const logsData = await response.text();
+      setBuildLogs(logsData);
 
-  const handleStartBuild = () => {
-    // Logic to start the build (you can integrate this with your API)
-    
-    alert("Build Started!");
+      // Update project link only after logs are printed
+      if (logsData.trim() !== "") {
+        setProjectLink(`http://${project.projectName}.localhost:8000`);
+      }
+    } catch (error) {
+      console.error("Error fetching build logs:", error);
+      setBuildLogs("Failed to load build logs.");
+    }
   };
 
+  // Function to start the build
+  const handleStartBuild = async () => {
+    setBuildLogs("Build in progress...");
+
+    try {
+      // Trigger the build
+      const startBuildResponse = await fetch(`http://localhost:8080/api/project/startBuild/${buildId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!startBuildResponse.ok) {
+        throw new Error("Failed to start build.");
+      }
+
+      // Fetch build logs only after successful build trigger
+      await fetchBuildLogs();
+
+    } catch (error) {
+      console.error("Error:", error);
+      setBuildLogs((prevLogs) => prevLogs + "\n" + error.message);
+    }
+  };
+
+  // Logout and clear localStorage
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
@@ -40,13 +71,18 @@ const ProjectBuild = () => {
           Logout
         </button>
       </header>
+
       <div className="project-build-container">
         <div className="top-section">
           <div className="project-link-box">
             <h3>Project Link</h3>
-            <a href={projectLink} target="_blank" rel="noopener noreferrer">
-              {projectLink}
-            </a>
+            {projectLink === "Generating...." ? (
+              <span id="linktext">{projectLink}</span> // Shows as text initially
+            ) : (
+              <a href={projectLink} target="_blank" rel="noopener noreferrer">
+                {projectLink}
+              </a>
+            )}
           </div>
           <button className="start-build-btn" onClick={handleStartBuild}>
             Start Build

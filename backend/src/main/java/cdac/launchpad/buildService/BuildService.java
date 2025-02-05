@@ -41,6 +41,7 @@ public class BuildService {
     }
     // Method to retrieve build logs by project ID
     public static String getBuildLogs(String projectId) {
+        System.out.println(buildLogsStorage);
         return buildLogsStorage.getOrDefault(projectId, "No logs found for this project.");
     }
 }
