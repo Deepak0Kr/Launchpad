@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./ProjectBuild.css";
 
 const ProjectBuild = () => {
   const [buildLogs, setBuildLogs] = useState("");
-  const [projectLink, setProjectLink] = useState("https://example.com/project-link");
+  const [projectLink, setProjectLink] = useState("Generating....");
   const navigate = useNavigate();
 
   const project = JSON.parse(localStorage.getItem("project"));
@@ -23,10 +23,12 @@ const ProjectBuild = () => {
 
   const handleStartBuild = () => {
     // Logic to start the build (you can integrate this with your API)
+    
     alert("Build Started!");
   };
 
   const handleLogout = () => {
+    localStorage.clear();
     navigate("/login");
   };
 
