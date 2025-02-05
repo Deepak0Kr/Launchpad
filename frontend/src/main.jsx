@@ -7,6 +7,7 @@ import SignUp from './pages/signup/SignUp.jsx'
 import Dashboard from './pages/dashboard/Dashboard.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OtpVerification from './pages/OtpVerification/OtpVerification.jsx'
+import CreateProject from './pages/createProject/CreateProject.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/otp-verification" element={<OtpVerification />} />
+        <Route path="/create-project" element={<CreateProject />} />
       </Routes>
     </Router>
   </StrictMode>

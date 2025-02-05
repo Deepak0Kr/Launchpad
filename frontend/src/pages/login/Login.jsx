@@ -22,7 +22,9 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         if(data){
-          navigate("/dashboard",  { state: { data,username } });
+          localStorage.setItem("username", username);
+          localStorage.setItem("userdata", JSON.stringify(data));
+          navigate("/dashboard",);
         }else{
           alert("wrong id pass.");
         }

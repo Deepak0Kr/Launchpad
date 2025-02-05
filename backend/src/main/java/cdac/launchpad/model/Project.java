@@ -1,9 +1,6 @@
 package cdac.launchpad.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -15,6 +12,8 @@ public class Project {
     private Long id;
 
     private String projectType;
+
+    @Column(unique = true)
     private String projectName;
     private String repoLink;
     private Long userId;

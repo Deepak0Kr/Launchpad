@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,13 +20,13 @@ public class ProjectController {
     private ProjectService projectService;
 
     @PostMapping("/createProject")
-    public ResponseEntity<Map<String, String>> createProject(@RequestBody Project project) {
+    public ResponseEntity<Project> createProject(@RequestBody Project project) {
         System.out.println(project);
         Project createdProject = projectService.createProject(project);
-        BuildService.startBuilding(createdProject); // Start the build process
-        Map<String, String> response = new HashMap<>();
-        response.put("id", createdProject.getProjectName()); // Use project name as ID
-        return ResponseEntity.ok(response);
+//        BuildService.startBuilding(createdProject); // Start the build process
+//        Map<String, String> response = new HashMap<>();
+//        response.put("id", createdProject.getProjectName()); // Use project name as ID
+        return ResponseEntity.ok(createdProject);
     }
 
     @GetMapping("/getProject/{projectName}")
@@ -33,6 +34,12 @@ public class ProjectController {
         System.out.println(projectName);
         Project project = projectService.getProjectByName(projectName);
         return ResponseEntity.ok(project);
+    }
+
+    @GetMapping("/getProjects/{userId}")
+    public ResponseEntity<List<Project>> getAllProject(@PathVariable Long userId) {
+        List<Project> projects = projectService.getAllProjectByUserId(userId);
+        return ResponseEntity.ok(projects);
     }
 
     @GetMapping("/getBuildLogs/{projectName}")
