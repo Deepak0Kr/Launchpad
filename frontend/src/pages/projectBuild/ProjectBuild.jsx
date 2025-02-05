@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./ProjectBuild.css";
 
-const ProjectBuild = ({ buildId }) => {
+const ProjectBuild = () => {
   const [buildLogs, setBuildLogs] = useState("");
   const [projectLink, setProjectLink] = useState("https://example.com/project-link");
   const navigate = useNavigate();
+
+  const project = JSON.parse(localStorage.getItem("project"));
+  let buildId = project.id;
 
   useEffect(() => {
     // Fetch build logs from the API
@@ -30,7 +33,7 @@ const ProjectBuild = ({ buildId }) => {
   return (
     <>
       <header className="dashboard-header">
-        <h2>Welcome to Your Dashboard</h2>
+        <h2>Welcome to {project.projectName}</h2>
         <button className="logout-btn-header" onClick={handleLogout}>
           Logout
         </button>

@@ -1,11 +1,10 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { username } = location.state || {};
+  const username = localStorage.getItem("username");
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const Dashboard = () => {
 
   const handleProjectClick = (index) => {
     localStorage.setItem("project", JSON.stringify(projects[index]  ))
-    // navigate(`/project/${projectId}`); // Navigate to a project detail page or perform another action
+    navigate(`/project-build`); // Navigate to a project detail page or perform another action
   };
 
   const handleLogout = () => {
@@ -28,7 +27,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
      <header className="dashboard-header">
-        <h2>Welcome to Your Dashboard, {username}!</h2>
+        <h2>Welcome to , {username}!</h2>
         <button className="logout-btn-header" onClick={handleLogout}>
           Logout
         </button>
