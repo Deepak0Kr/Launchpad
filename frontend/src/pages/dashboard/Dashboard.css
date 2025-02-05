@@ -1,214 +1,69 @@
-/* Dashboard Container */
 .dashboard-container {
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #f8f9fa; /* Light gray background */
-  font-family: 'Arial', sans-serif;
-}
-
-/* Dashboard Header */
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background-color: #ffffff;
-  box-shadow: 0px 4px 12px rgba(52, 152, 219, 0.1); /* Soft blue shadow */
+  align-items: flex-start; /* Align the content to the top-left */
 }
 
 .dashboard-header h2 {
-  font-size: 26px;
-  font-weight: 600;
-  color: #2c3e50; /* Dark blue-gray */
-  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px; /* Space below the header */
+  color: black;
 }
 
-.logout-btn-header {
-  margin-right: 50px;
-  padding: 10px 20px;
-  background-color: #3498db; /* Soft blue */
-  color: #fff;
-  border: none;
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 tiles per row */
+  gap: 20px;
+  width: 100%; /* Ensure the grid takes the full width */
+  justify-items: start; /* Align tiles from left to right */
+}
+
+.project-tile-link {
+  text-decoration: none; /* Remove underline */
+}
+
+.project-tile {
+  background-color: #f8f9fa;
+  padding: 20px; /* Reduced padding to decrease the height */
   border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.logout-btn-header:hover {
-  background-color: #2980b9; /* Darker blue on hover */
-}
-
-/* Dashboard Content */
-.dashboard-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px 320px; /* Add extra padding at the bottom */
-  background-color: #f8f9fa; /* Light gray background */
-}
-
-/* Git Import Container */
-.git-import-container {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(52, 152, 219, 0.1); /* Soft blue shadow */
-  width: 100%;
-  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-}
-
-.git-import-container h3 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #2c3e50; /* Dark blue-gray */
-  margin-bottom: 24px;
-}
-
-.git-import-form {
+  width: 100%; /* Ensures tiles take full width available in the grid */
+  min-height: 150px; /* Decreased height to make tiles smaller */
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; /* Show pointer cursor when hovering over tiles */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
 }
 
-.git-import-input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
+.project-tile h3 {
+  margin: 0;
+  font-size: 22px; /* Increased font size for better visibility */
   color: #333;
-  background-color: #f0f0f0; /* Soft gray background */
-  outline: none;
-  transition: border-color 0.3s ease;
 }
 
-.git-import-input:focus {
-  border-color: #3498db; /* Soft blue on focus */
-  background-color: #ffffff; /* White background on focus */
+.project-tile:hover {
+  background-color: #e0e0e0; /* Change background on hover */
 }
 
-.git-import-btn {
-  padding: 12px 20px;
-  background-color: #3498db; /* Soft blue */
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+@media (max-width: 1024px) {
+  .projects-list {
+    grid-template-columns: repeat(3, 1fr); /* 3 tiles per row on medium screens */
+  }
 }
 
-.git-import-btn:hover {
-  background-color: #2980b9; /* Darker blue on hover */
-}
-/* Build Logs Container */
-/* Build Logs Container */
-.build-logs-container {
-  position: fixed;
-  bottom: 0;
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Adjust for exact centering */
-  width: 80%; /* Adjust width as needed (e.g., 80% of the screen width) */
-  max-width: 800px; /* Optional: Set a maximum width */
-  background-color: #1e1e1e; /* Dark background for terminal look */
-  padding: 20px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  color: #ffffff;
-  font-family: monospace;
-  max-height: 200px; /* Adjust height as needed */
-  overflow-y: auto;
-  box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-  z-index: 1000; /* Ensure it stays above other content */
-}
-
-.build-logs-container h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: #ffffff;
-}
-
-.build-logs {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #d5e5d5; /* Green text for terminal effect */
-}
-
-/* Scrollbar Styling */
-.build-logs-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.build-logs-container::-webkit-scrollbar-track {
-  background: #1e1e1e; /* Dark background */
-}
-
-.build-logs-container::-webkit-scrollbar-thumb {
-  background: #555; /* Scrollbar handle color */
-  border-radius: 4px;
-}
-
-.build-logs-container::-webkit-scrollbar-thumb:hover {
-  background: #777; /* Scrollbar handle hover color */
-}
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .build-logs-container {
-    width: 90%; /* Increase width for smaller screens */
-    max-width: none; /* Remove max-width restriction */
+  .projects-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 tiles per row on smaller screens */
   }
 }
 
-/* Error Message */
-.error-message {
-  background-color: #ffebee; /* Light red background */
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 24px;
-  color: #c62828; /* Dark red text */
-  font-size: 14px;
-  box-shadow: 0px 4px 12px rgba(52, 152, 219, 0.1); /* Soft blue shadow */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .dashboard-header {
-    padding: 16px 20px;
-  }
-
-  .dashboard-header h2 {
-    font-size: 22px;
-  }
-
-  .logout-btn-header {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .git-import-container {
-    padding: 24px;
-  }
-
-  .git-import-container h3 {
-    font-size: 20px;
-  }
-
-  .git-import-input {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-
-  .git-import-btn {
-    padding: 10px 16px;
-    font-size: 14px;
+@media (max-width: 480px) {
+  .projects-list {
+    grid-template-columns: 1fr; /* 1 tile per row on very small screens */
   }
 }
