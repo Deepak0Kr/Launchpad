@@ -1,5 +1,6 @@
 package cdac.launchpad.controller;
 
+import cdac.launchpad.auth.JwtUtil;
 import cdac.launchpad.mailservice.MailService;
 import cdac.launchpad.model.User;
 import cdac.launchpad.service.UserService;
@@ -30,12 +31,14 @@ public class UserController {
 
     // Login Endpoint
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         // Find the user by username and validate password
         User loggedInUser = null;
         if (userService.validateLogin(user)) {
             // Fetch the user details if login is successful
             loggedInUser = userService.findByUsername(user.getUsername());
+            String token = JwtUtil.generateToken(user.getUsername());
+            return ResponseEntity.ok(token);
         }
 
         // If login successful, return the user data, else return null

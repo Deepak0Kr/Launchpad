@@ -1,8 +1,6 @@
 package cdac.launchpad.service;
 
-import cdac.launchpad.buildService.BuildService;
 import cdac.launchpad.model.Project;
-import cdac.launchpad.model.User;
 import cdac.launchpad.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
