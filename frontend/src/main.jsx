@@ -10,6 +10,7 @@ import OtpVerification from './pages/OtpVerification/OtpVerification.jsx'
 import CreateProject from './pages/createProject/CreateProject.jsx'
 import ProjectBuild from './pages/projectBuild/ProjectBuild.jsx'
 import ForgotPassword from './pages/forgotPassword/ForgotPassword.jsx'
+import ResetPassword from './pages/resetPassword/ResetPassword.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/create-project" element={<CreateProject />} />
         <Route path="/project-build" element={<ProjectBuild />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/Reset-password" element={<ResetPassword />} />
       </Routes>
     </Router>
   // </StrictMode>

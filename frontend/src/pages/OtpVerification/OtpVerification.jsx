@@ -6,11 +6,10 @@ const OtpVerification = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    const {data} = location.state || {};
-    const email = data.email;
-   
+    const { data } = location.state || {};
+    const email = data?.email;
+    const source = data?.source; // Determine the source (signup or forgot-password)
     
-
     const [otp, setOtp] = useState("");
     const [error, setError] = useState("");
 
@@ -23,7 +22,6 @@ const OtpVerification = () => {
         fetch(`http://localhost:8080/api/users/verify?email=${email}&otp=${otp}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            
         })
             .then((response) => response.json())
             .then((data) => {
@@ -32,8 +30,11 @@ const OtpVerification = () => {
                 if (data.success) {
                     alert("OTP Verified Successfully!");
                     
-                    
-                    navigate("/login");
+                    if (source === "forgot-password") {
+                        navigate("/reset-password", { state: { email } });
+                    } else {
+                        navigate("/login");
+                    }
                 } else {
                     setError("Invalid OTP. Please try again.");
                 }
