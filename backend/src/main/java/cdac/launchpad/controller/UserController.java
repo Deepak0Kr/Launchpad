@@ -17,6 +17,23 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
+
+
+    static class AuthResponse {
+        private String token;
+        private User authUser;
+        public AuthResponse(String token,User user) {
+            this.token = token;
+            this.authUser = user;
+        }
+        public String getToken() {
+            return token;
+        }
+        public User setUserData() {
+            return authUser;
+        }
+    }
+
     @Autowired
     private UserService userService;
 
@@ -38,7 +55,7 @@ public class UserController {
             // Fetch the user details if login is successful
             loggedInUser = userService.findByUsername(user.getUsername());
             String token = JwtUtil.generateToken(user.getUsername());
-            return ResponseEntity.ok(token);
+            return ResponseEntity.ok(new AuthResponse(token, loggedInUser));
         }
 
         // If login successful, return the user data, else return null

@@ -20,8 +20,9 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data[1]+"login data 123");
         if(data){
+          
           localStorage.setItem("username", username);
           localStorage.setItem("userdata", JSON.stringify(data));
           navigate("/dashboard",);

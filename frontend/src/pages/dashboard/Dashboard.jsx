@@ -6,11 +6,20 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
+  const userData = JSON.parse(localStorage.getItem("userData"))
+  // const token = userData.token;
+  console.log(userData);
+   
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     // Fetch projects from the API
-    fetch("http://localhost:8080/api/project/getProjects/1")
+    fetch("http://localhost:8080/api/project/getProjects/1",{
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
       .then((response) => response.json())
       .then((data) => setProjects(data))
       .catch((error) => {
