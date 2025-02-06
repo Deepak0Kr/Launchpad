@@ -7,7 +7,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
   const userData = JSON.parse(localStorage.getItem("userdata"))
-  console.log(userData);
 
   const [projects, setProjects] = useState([]);
 
@@ -16,21 +15,25 @@ const Dashboard = () => {
       alert("login please");
       navigate("/login");
     } else {
-
-      // Fetch projects from the API
-      fetch(`http://localhost:8080/api/project/getProjects/${userData.id}`, {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${userData.token}`
-        }
-      })
-        .then((response) => response.json())
-        .then((data) => setProjects(data))
-        .catch((error) => {
-          console.error("Error fetching projects", error);
-        });
+      getProjects();
     }
   }, []);
+
+  function getProjects() {
+    console.log(userData.id);
+    
+    fetch(`http://localhost:8080/api/project/getProjects/${userData.id}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${userData.token}`
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => setProjects(data))
+      .catch((error) => {
+        console.error("Error fetching projects", error);
+      });
+  }
 
   const handleProjectClick = (index) => {
     localStorage.setItem("project", JSON.stringify(projects[index]))

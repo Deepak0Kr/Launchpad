@@ -5,7 +5,7 @@ import "./Login.css";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
 
@@ -71,14 +71,14 @@ const Login = () => {
           />
         </div>
         <div className="options">
-          <label>
+          {/* <label>
             <input
               type="checkbox"
               checked={rememberMe}
               onChange={() => setRememberMe(!rememberMe)}
             />
             Remember Me
-          </label>
+          </label> */}
           <button className="forgot-password">Forgot Password?</button>
         </div>
         <button className="login-btn" onClick={handleLogin}>
