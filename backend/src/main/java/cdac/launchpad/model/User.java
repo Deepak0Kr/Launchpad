@@ -13,8 +13,12 @@ public class User {
     private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private String username;
     private String password;
+
+    @Column(unique = true)
     private String email;
 
     @Transient
