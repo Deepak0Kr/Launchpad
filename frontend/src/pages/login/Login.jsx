@@ -1,52 +1,47 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./Login.css"; 
+import "./Login.css";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [rememberMe, setRememberMe] = useState(false);
-
   const navigate = useNavigate();
 
   const handleLogin = () => {
-
     fetch("http://localhost:8080/api/users/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username, password}), // Convert the data to JSON
+      body: JSON.stringify({ username, password }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if(data){
-          
+        if (data) {
           localStorage.setItem("username", username);
           localStorage.setItem("userdata", JSON.stringify(data));
-          navigate("/dashboard",);
-        }else{
-          alert("wrong id pass.");
+          navigate("/dashboard");
+        } else {
+          alert("Wrong username or password.");
         }
       })
       .catch((error) => {
-        console.log("Error login user:", error);
-        alert("Failed to login user.");
+        console.log("Error logging in user:", error);
+        alert("Failed to log in user.");
       });
-
-    
   };
 
   return (
     <div>
       <header>
-      <Link to="/">
-        <div className="header-title">Launchpad</div>
+        <Link to="/">
+          <div className="header-title">Launchpad</div>
         </Link>
         <div className="auth-buttons">
-        <Link to="/signup">
-              <button className="signup">Sign Up</button>
+          <Link to="/signup">
+            <button className="signup">Sign Up</button>
           </Link>
         </div>
       </header>
@@ -71,15 +66,9 @@ const Login = () => {
           />
         </div>
         <div className="options">
-          {/* <label>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
-            />
-            Remember Me
-          </label> */}
-          <button className="forgot-password">Forgot Password?</button>
+          <button className="forgot-password" onClick={() => navigate("/forgot-password")}>
+            Forgot Password?
+          </button>
         </div>
         <button className="login-btn" onClick={handleLogin}>
           Login
