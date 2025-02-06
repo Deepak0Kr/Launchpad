@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -12,7 +12,7 @@ import ProjectBuild from './pages/projectBuild/ProjectBuild.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <Router>
       <Routes>
         <Route path='/' element={<App />} />
@@ -24,5 +24,5 @@ createRoot(document.getElementById('root')).render(
         <Route path="/project-build" element={<ProjectBuild />} />
       </Routes>
     </Router>
-  </StrictMode>
+  // </StrictMode>
 )

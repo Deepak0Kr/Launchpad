@@ -12,18 +12,24 @@ const Dashboard = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // Fetch projects from the API
-    fetch(`http://localhost:8080/api/project/getProjects/${userData.id}`, {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${userData.token}`
-      }
-    })
-      .then((response) => response.json())
-      .then((data) => setProjects(data))
-      .catch((error) => {
-        console.error("Error fetching projects", error);
-      });
+    if (!userData || !userData.token) {
+      alert("login please");
+      navigate("/login");
+    } else {
+
+      // Fetch projects from the API
+      fetch(`http://localhost:8080/api/project/getProjects/${userData.id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${userData.token}`
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => setProjects(data))
+        .catch((error) => {
+          console.error("Error fetching projects", error);
+        });
+    }
   }, []);
 
   const handleProjectClick = (index) => {
