@@ -47,8 +47,11 @@ public class ProjectController {
     public ResponseEntity<String> startBuild(@PathVariable Long projectID) {
         Project project = projectService.getProjectByID(projectID);
         BuildService.startBuilding(project); // Start the build process
-//        Map<String, String> response = new HashMap<>();
-//        response.put("id", project.getProjectName()); // Use project name as ID
         return ResponseEntity.ok("build");
+    }
+
+    @DeleteMapping("/deleteProject/{projectID}")
+    public ResponseEntity<Project> deleteProject(@PathVariable Long projectID) {
+        return ResponseEntity.ok(projectService.deletProject(projectID));
     }
 }

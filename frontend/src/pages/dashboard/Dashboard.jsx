@@ -38,7 +38,7 @@ const Dashboard = () => {
 
   const handleDeleteProject = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:8080/projects/${projectId}`, {
+      const response = await fetch(`http://localhost:8080/api/project/deleteProject/${projectId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

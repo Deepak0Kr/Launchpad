@@ -39,5 +39,12 @@ public class ProjectService {
         return projectRepository.getAllByUserId(userId);
     }
 
-
+    public Project deletProject(Long projectId){
+        Optional<Project> project = projectRepository.findById(projectId);
+        if (project.isPresent()){
+            projectRepository.deleteById(projectId);
+            return project.get();
+        }
+        return null;
+    }
 }

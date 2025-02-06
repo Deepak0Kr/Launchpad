@@ -56,6 +56,7 @@ const CreateProject = () => {
       setSuccessMessage("Project created successfully!");
       navigate("/dashboard")
     } catch (err) {
+      alert("Project already exist");
       setError(err.message || "An error occurred while creating the project.");
     } finally {
       setIsLoading(false);
