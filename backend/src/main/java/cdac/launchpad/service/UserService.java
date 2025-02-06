@@ -11,6 +11,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserEncryptService userEncryptService;
+
     // Register a new user
     public User registerUser(User user) {
         // Add validation logic here if needed
@@ -18,6 +21,8 @@ public class UserService {
     }
 
     public User saveUser(User user){
+        String hashedPassword = userEncryptService.encryptPassword(user.getPassword());
+        user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
 
@@ -32,7 +37,7 @@ public class UserService {
         User existingUser = userRepository.findByUsername(user.getUsername());
 
         // If user exists, compare passwords (in plain text)
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+        if (existingUser != null && userEncryptService.verifyPassword(user.getPassword(), existingUser.getPassword())) {
             return true; // Login successful
         }
         return false; // Invalid credentials
