@@ -8,13 +8,20 @@ const ProjectBuild = () => {
   const navigate = useNavigate();
 
   // Get project details from localStorage
+  const userData = JSON.parse(localStorage.getItem("userdata"));
   const project = JSON.parse(localStorage.getItem("project"));
   let buildId = project.id;
 
   // Function to fetch build logs
   const fetchBuildLogs = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/project/getBuildLogs/${project.projectName}`);
+      const response = await fetch(`http://localhost:8080/api/project/getBuildLogs/${project.projectName}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${userData.token}`
+        }
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch build logs.");
       }
@@ -41,6 +48,7 @@ const ProjectBuild = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${userData.token}`
         },
       });
 

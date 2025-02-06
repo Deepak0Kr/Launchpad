@@ -20,7 +20,7 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[1]+"login data 123");
+        console.log(data);
         if(data){
           
           localStorage.setItem("username", username);

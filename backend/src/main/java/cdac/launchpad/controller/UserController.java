@@ -55,7 +55,8 @@ public class UserController {
             // Fetch the user details if login is successful
             loggedInUser = userService.findByUsername(user.getUsername());
             String token = JwtUtil.generateToken(user.getUsername());
-            return ResponseEntity.ok(new AuthResponse(token, loggedInUser));
+            loggedInUser.setToken(token);
+            return ResponseEntity.ok(loggedInUser);
         }
 
         // If login successful, return the user data, else return null

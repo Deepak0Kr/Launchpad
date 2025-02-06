@@ -14,8 +14,8 @@ const CreateProject = () => {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  // const userData = JSON.parse(localStorage.getItem("userdata"));
-  const token = localStorage.getItem("userData");
+  const userData = JSON.parse(localStorage.getItem("userdata"));
+  // const token = localStorage.getItem("userData");
 
   const handleLogout = () => {
     navigate("/login"); // Redirect to login page after logging out
@@ -39,7 +39,7 @@ const CreateProject = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${userData.token}`
         },
         body: JSON.stringify({
           projectType,
