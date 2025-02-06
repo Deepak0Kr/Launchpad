@@ -16,6 +16,8 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private BuildService buildService;
 
     @PostMapping("/createProject")
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
@@ -39,14 +41,14 @@ public class ProjectController {
 
     @GetMapping("/getBuildLogs/{projectName}")
     public ResponseEntity<String> getBuildLogs(@PathVariable String projectName) {
-        String logs = BuildService.getBuildLogs(projectName);
+        String logs = buildService.getBuildLogs(projectName);
         return ResponseEntity.ok(logs);
     }
 
     @PostMapping("/startBuild/{projectID}")
     public ResponseEntity<String> startBuild(@PathVariable Long projectID) {
         Project project = projectService.getProjectByID(projectID);
-        BuildService.startBuilding(project); // Start the build process
+        buildService.startBuilding(project); // Start the build process
         return ResponseEntity.ok("build");
     }
 
