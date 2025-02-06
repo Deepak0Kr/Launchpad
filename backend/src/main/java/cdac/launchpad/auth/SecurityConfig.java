@@ -2,6 +2,7 @@ package cdac.launchpad.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,19 +14,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+        http.cors(Customizer.withDefaults()) // Enable CORS with default settings
+                .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/login").permitAll() // Allow login endpoint
-                        .requestMatchers("/api/users/register").permitAll()
-                        .requestMatchers("/api/users/send").permitAll()
-                        .requestMatchers("/api/users/verify").permitAll()
-                        .requestMatchers("/api/users/forgetPassword").permitAll()
-                        .anyRequest().authenticated() // Secure other endpoints
+                        .requestMatchers("/api/users/login",
+                                "/api/users/register",
+                                "/api/users/send",
+                                "/api/users/verify",
+                                "/api/users/forgetPassword").permitAll() // Allow these endpoints
+                        .anyRequest().authenticated() // Secure all other endpoints
                 )
                 .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
