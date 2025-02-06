@@ -70,7 +70,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h2>Welcome to , {username}!</h2>
+        <h2>Welcome to, {username}!</h2>
         <button className="logout-btn-header" onClick={handleLogout}>
           Logout
         </button>
