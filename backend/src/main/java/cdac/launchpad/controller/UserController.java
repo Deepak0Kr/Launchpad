@@ -17,23 +17,6 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
-
-
-    static class AuthResponse {
-        private String token;
-        private User authUser;
-        public AuthResponse(String token,User user) {
-            this.token = token;
-            this.authUser = user;
-        }
-        public String getToken() {
-            return token;
-        }
-        public User setUserData() {
-            return authUser;
-        }
-    }
-
     @Autowired
     private UserService userService;
 
@@ -100,6 +83,13 @@ public class UserController {
             response.put("message", "Invalid OTP!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+    }
+
+    @PostMapping("/forgetPassword")
+    public ResponseEntity<User> forgetPassword(@RequestBody User user){
+        User userInDb = userService.findByUsername(user.getUsername());
+        userInDb.setPassword(user.getPassword());
+        return ResponseEntity.ok(userService.saveUser(userInDb));
     }
 
 }

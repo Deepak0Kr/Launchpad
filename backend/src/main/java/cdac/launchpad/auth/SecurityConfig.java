@@ -15,10 +15,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/login").permitAll()
+                        .requestMatchers("/api/users/login").permitAll() // Allow login endpoint
                         .requestMatchers("/api/users/register").permitAll()
                         .requestMatchers("/api/users/send").permitAll()
-                        .requestMatchers("/api/users/verify").permitAll()// Allow login endpoint
+                        .requestMatchers("/api/users/verify").permitAll()
+                        .requestMatchers("/api/users/forgetPassword").permitAll()
                         .anyRequest().authenticated() // Secure other endpoints
                 )
                 .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);

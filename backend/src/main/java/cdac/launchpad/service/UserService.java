@@ -14,6 +14,10 @@ public class UserService {
     // Register a new user
     public User registerUser(User user) {
         // Add validation logic here if needed
+        return saveUser(user);
+    }
+
+    public User saveUser(User user){
         return userRepository.save(user);
     }
 
