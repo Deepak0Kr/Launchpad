@@ -50,7 +50,7 @@ const OtpVerification = () => {
             <h2>OTP Verification</h2>
             <p>Enter the OTP sent to your email: <strong>{email}</strong></p>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="otp" value={otp} onChange={handleChange} placeholder="Enter OTP" required />
+                <input type="number" name="otp" value={otp} onChange={handleChange} placeholder="Enter OTP" required />
                 {error && <p className="error-message">{error}</p>}
                 <button type="submit" className="otp-btn">Verify OTP</button>
             </form>
