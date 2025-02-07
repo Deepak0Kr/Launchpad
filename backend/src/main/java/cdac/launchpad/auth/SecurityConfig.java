@@ -21,7 +21,9 @@ public class SecurityConfig {
                                 "/api/users/register",
                                 "/api/users/send",
                                 "/api/users/verify",
-                                "/api/users/forgetPassword").permitAll() // Allow these endpoints
+                                "/api/users/forgetPassword",
+                                "/actuator/prometheus"
+                        ).permitAll() // Allow these endpoints
                         .anyRequest().authenticated() // Secure all other endpoints
                 )
                 .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
