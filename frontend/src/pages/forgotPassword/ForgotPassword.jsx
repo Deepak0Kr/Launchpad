@@ -5,28 +5,28 @@ import { useNavigate, Link } from "react-router-dom";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const data = {"email":email,
+    "source":"forgot-password"
+  }
 
   const handleOtpRequest = () => {
-    fetch("http://localhost:8080/api/users/send-otp", {
+    fetch(`http://localhost:8080/api/users/send?email=${email}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert("OTP sent to your email.");
-          navigate("/otp-verification", { state: { data: { email } } });
-        } else {
-          alert("Email not found. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.log("Error sending OTP:", error);
+      .then((response) => response.text())
+      .then((resData) => {
+        console.log("OTP sent successfully:", resData);
+        // Redirect to OTP verification page
+        navigate("/otp-verification", { state: { data } });
+    })
+    .catch((otpError) => {
+        console.error("Error sending OTP:", otpError);
         alert("Failed to send OTP.");
-      });
+    });
   };
 
   return (

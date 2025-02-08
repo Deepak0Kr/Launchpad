@@ -7,6 +7,7 @@ const OtpVerification = () => {
     const navigate = useNavigate();
     
     const { data } = location.state || {};
+    
     const email = data?.email;
     const source = data?.source; // Determine the source (signup or forgot-password)
     

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateProject.css";
 
@@ -15,6 +15,14 @@ const CreateProject = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   const userData = JSON.parse(localStorage.getItem("userdata"));
+  useEffect(() => {
+    if (!userData || !userData.token) {
+      alert("login please");
+      navigate("/login");
+    } 
+      
+    
+  }, []);
   // const token = localStorage.getItem("userData");
 
   const handleLogout = () => {

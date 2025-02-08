@@ -87,7 +87,7 @@ public class UserController {
 
     @PostMapping("/forgetPassword")
     public ResponseEntity<User> forgetPassword(@RequestBody User user){
-        User userInDb = userService.findByUsername(user.getUsername());
+        User userInDb = userService.findByEmail(user.getEmail());
         userInDb.setPassword(user.getPassword());
         return ResponseEntity.ok(userService.saveUser(userInDb));
     }

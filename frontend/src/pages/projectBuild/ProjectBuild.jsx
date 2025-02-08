@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProjectBuild.css";
 
@@ -9,6 +9,12 @@ const ProjectBuild = () => {
 
   // Get project details from localStorage
   const userData = JSON.parse(localStorage.getItem("userdata"));
+  useEffect(() => {
+    if (!userData || !userData.token) {
+      alert("login please");
+      navigate("/login");
+    } 
+  }, []);
   const project = JSON.parse(localStorage.getItem("project"));
   let buildId = project.id;
 

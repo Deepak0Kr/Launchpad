@@ -7,25 +7,25 @@ const ResetPassword = () => {
     
     const email = location.state?.email || "";
     
-    const [newPassword, setNewPassword] = useState("");
+    const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
     const handleReset = (e) => {
         e.preventDefault();
-        if (newPassword !== confirmPassword) {
+        if (password !== confirmPassword) {
             setError("Passwords do not match");
             return;
         }
         
-        fetch("http://localhost:8080/api/users/reset-password", {
+        fetch("http://localhost:8080/api/users/forgetPassword", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, newPassword }),
+            body: JSON.stringify({ email, password }),
         })
         .then((response) => response.json())
         .then((data) => {
-            if (data.success) {
+            if (data) {
                 alert("Password reset successful!");
                 navigate("/login");
             } else {
@@ -47,8 +47,8 @@ const ResetPassword = () => {
                     <label>New Password</label>
                     <input 
                         type="password" 
-                        value={newPassword} 
-                        onChange={(e) => setNewPassword(e.target.value)} 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
                         placeholder="Enter new password" 
                         required 
                     />

@@ -43,9 +43,10 @@ const SignUp = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("User registered successfully:", data);
+                    // console.log("User registered successfully:", data);
                     // Send OTP request to the server after registration
                     const otpData = data.email ;
+                   
                     
                     fetch(`http://localhost:8080/api/users/send?email=${otpData}`, {
                         method: "POST",
